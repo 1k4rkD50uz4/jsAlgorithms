@@ -1,0 +1,9 @@
+{
+  "name": "js-algorithms",
+  "version": "0.0.0",
+  "description": "jsAlgorithms",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}

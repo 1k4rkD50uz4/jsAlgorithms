@@ -1,1 +1,1 @@
-# jsAlgorithms
+# Selection sort algorithm example
