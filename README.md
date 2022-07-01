@@ -1,1 +1,1 @@
-# Selection sort algorithm example
+# JS Algorithms and Data Structures
