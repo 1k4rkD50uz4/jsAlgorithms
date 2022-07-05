@@ -8,45 +8,36 @@
 // opening bracket.  If
 //
 //***********************************************************************************************************
+const valid = () => c.charCodeAt(0) == (arr[i - 1]).charCodeAt(0) - 2;
 
-function checkBalancedBrackets(s) {
-    const isBalanced = checkValue => {    
-        if (!checkValue) {
-            const getKey = key => brackets.filter(item => item.key == key)[0];
-            let prevKey = getKey(c),
-                curKey = getKey(res.value);                
-            if ((prevKey && curKey && prevKey.value == curKey.key) || (prevKey && prevKey.value == res.value)) {
-                balanced = true;
-                i++;
+let res = '{([{}])}'.split('').map((c, i, arr) => {
+    i > 0 ? c != arr[i - 1] ? match : 
+};
+
+function checkBalancedBrackets() {
+    const isBalanced = () => {  
+        let key = getKey(c);
+        if (key) {
+            if (key.value == res.value) {
+                continue;
             }
             else {
-                balanced = false;
-                i++;
-            } 
+                key = getKey(res.value);
+                if (key) {
+
+                }
+            }
         }
-        else {
-            const getValue = value => brackets.filter(item => item.value == value)[0];
-            let len = s.length - 1,
-                keyInd = s.indexOf(getValue(res.value).key),
-                valueInd = len - s.indexOf(getValue(res.value).value);
-            if (keyInd == valueInd) {
-                balanced = true;
-                i++;
-            }                
-        }
+        //const getValue = value => brackets.filter(item => item.value == value)[0];
+        //let len = s.length - 1,
+        //    keyInd = s.indexOf(getValue(res.value).key),
+        //    valueInd = len - s.indexOf(getValue(res.value).value);
+        //if (keyInd == valueInd) {
+        //    balanced = true;
+        //    i++;
+        //}   
     };
-    let iter = s[Symbol.iterator](),
-        res = iter.next(),
-        i=0,
-        c = res.value,
-        arr = '{}()[]'.split(''),
-        brackets = arr
-            .map((c, i, arr) => !(i % 2) ? ({
-                key: c,
-                value: arr[i + 1]
-            }) : undefined)
-            .filter(c => c != undefined),
-        balanced = false;
+          
     res = iter.next();
     while (!res.done) {
         isBalanced(i == (s.length / 2));
@@ -56,24 +47,23 @@ function checkBalancedBrackets(s) {
     return balanced;
 }
 // Test case 1
-let s = '{}()[]',
-    actualRes = checkBalancedBrackets(s),
+let actualRes = checkBalancedBrackets(),
     expRes = true;
 if (actualRes == expRes) {
     console.log(`Test 1 of 3 passed.`);
 }
 // Test case 2
-s = '{([{}])}';
-actualRes = checkBalancedBrackets(s);
-expRes = true;
-if (actualRes == expRes) {
-    console.log(`Test 2 of 3 passed.`);
-}
+//s = '{([{}])}';
+//actualRes = checkBalancedBrackets(s);
+//expRes = true;
+//if (actualRes == expRes) {
+//    console.log(`Test 2 of 3 passed.`);
+//}
 // Test case 3
-s = '{(}';
-actualRes = checkBalancedBrackets(s);
-expRes = false;
-if (actualRes == expRes) {
-    console.log(`Test 3 of 3 passed.`);
-}
+//s = '{(}';
+//actualRes = checkBalancedBrackets(s);
+//expRes = false;
+//if (actualRes == expRes) {
+//    console.log(`Test 3 of 3 passed.`);
+//}
 console.log(`All tests passed.`);
