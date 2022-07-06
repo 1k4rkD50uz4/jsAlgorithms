@@ -53,4 +53,3 @@ expRes = false;
 if (actualRes == expRes) {
     console.log(`Test 3 of 3 passed.`);
 }
-console.log(`All tests passed.`);
