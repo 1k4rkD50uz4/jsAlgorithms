@@ -1,0 +1,102 @@
+{
+  "profile": {  
+    "name": "Page Designer",
+    "age": 24,
+    "location": "San Francisco, CA",
+    "workExperience": [
+      {
+        "Front End Engineer": {
+          "yearsExp": 3,
+          "languages": [
+            "HTML",
+            "CSS",
+            "JS"
+          ]
+        }
+      },
+      {
+        "Back End Developer": {
+          "yearsExp": 2,
+          "languages": [
+            "JS",
+            "Ruby",
+            "Python",
+            "C#",
+            "C"
+          ]
+        }
+      }
+    ],
+    "skills": {
+      "SDE": [
+        "SRS",
+        "SDD"
+      ],
+      "OOP": {
+        "principles": [
+          "abstraction",
+          "encapsulation",
+          "inheritance",
+          "polymorphism"
+        ],
+        "types": {
+          "predefined": {
+            "value": {
+              "integer": [
+                "byte",
+                "sbyte",
+                "int",
+                "uint",
+                "short",
+                "long"
+              ],
+              "floating-point": [
+                "double",
+                "float"
+              ]
+            },
+            "reference": [
+              "object",
+              "string"
+            ]
+          },
+          "user-defined": {
+            "classes": {
+              "members": {
+                "vars": [
+                  "declaration",
+                  "assignment",
+                  "value/ reference"
+                ],
+                "properties": [
+                  "getter",
+                  "setter"
+                ],
+                "methods": [
+                  "parameters",
+                  "statements"
+                ]
+              }
+            }
+          }
+        },
+        "services": [
+          "contract",
+          "operations",
+          "scalability",
+          "availability",
+          "fault-tolerance"
+        ]
+      },
+      "OOAD": [
+        "design patterns",
+        "UML"
+      ],
+      "SDLC": ["design","development","test","integration","deployment","feedback"]
+    },
+    "add": "(x,y)=>x+y",
+    "d": {
+      "e": "f"
+    }
+  }
+}
