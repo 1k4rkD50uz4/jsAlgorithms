@@ -1,7 +1,8 @@
 import { readFile } from 'fs/promises';
 import { inc } from './helperFunctions.js';
 
-/* Flatten a deep object */
+/* Flatten a deep object that has data with a breadth and depth of many levels to produce an object 
+ * of one level with the key consisting of the concatened keys and the value of the nested object. */
 async function Flattener() {
     const getKey = obj => Object.keys(obj)[i];
     let i = 0,
