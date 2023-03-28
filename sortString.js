@@ -1,4 +1,5 @@
-import { compare, inc } from '../utils/helperFunctions.js';
+import { compare, inc } from './utils/helperFunctions.js';
+const s = "The quick brown fox jumped over the lazy dog";
 
 //***********************************************************************************************************
 // Problem Statement:
@@ -17,6 +18,15 @@ import { compare, inc } from '../utils/helperFunctions.js';
 // simplify the algorithm.
 //***********************************************************************************************************
 
+//*****************************************************************************************************************
+// Brute-Force Solution- Array.sort
+// JS array's built-in sort method takes a callback that returns a value based on comparing two charcters, and 
+// implements sorting using this value.  The code is concise but there is no optimization.  The sort algorithm
+// loops over the entire array for each character to find the position to insert it into the array.  This is 
+// useful as a quick solution.  
+//***********************************************************************************************************
+let arr = s.split('').sort((a, b) => compare(a, b));
+
 //***********************************************************************************************************
 // Brute-Force Solution- searchNCharsNTimes
 // Starting with the min char, search the entire string to determine if the character is in the string and append to the array.  Repeat this procedure up to 
@@ -32,8 +42,7 @@ import { compare, inc } from '../utils/helperFunctions.js';
 function searchNCharsNTimes() {
     const incChar = c => String.fromCharCode(inc(c.charCodeAt(i))),
         foundChar = c => s.includes(c) ? arr.indexOf(c) == -1 ? true : false : false;
-    let s = "The quick brown fox jumped over the lazy dog",
-        i = 0,
+    let i = 0,
         // get the first char in the sentence
         start = s[i],
         arr = [' ', start],  // initialize the array with the minimum charcters space and upper-case letter to simplify the code
@@ -63,18 +72,15 @@ searchNCharsNTimes();
 // is exponential since n x n = O(n ^ 2).  
 //***********************************************************************************************************
 
-//***********************************************************************************************************
+//*******************************************************************************************************************
 // Improved Solution - searchSpliceArray
 // For each character in the string, traverse the array to the position of the character that is greater than 
 // the current string character.  Insert the string character at this position.  The function searchSpliceArray 
-// mutates the array in constant time using the array built-in splice method.  This solution scales for larger 
-// input sizes because the array is mutated in constant time and the position of the string character can be 
-// used to optimize the search for the array insertion position.  Although this step is not implemented to 
-// keep the code simple, the worst case analysis shows that the searchSpliceArray function has a shorter run time 
-// than the searchNCharsNTimes function.
-//***********************************************************************************************************
+// mutates the array in constant time using the array built-in splice method.  This solution scales well for larger 
+// input sizes because only the first character in the array (min) is checked against the current char.  
+//*******************************************************************************************************************
 
-function searchSpliceArray(s) {
+function searchSpliceArray() {
     let i = 0,
         iter = s[Symbol.iterator](),
         res = iter.next(),
@@ -104,12 +110,12 @@ function searchSpliceArray(s) {
         return arr;
     })();
 }
-searchSpliceArray('The quick brown fox jumped over the lazy dog');
+searchSpliceArray();
 
 //***********************************************************************************************************
 // Worst-case run-time analysis:
 // The searchSpliceArray function iterates over the array for each string character.  A custom algorithm 
-// can be implemented to determine the insertion method by calculating the minimum distance of the string 
-// characters and array indices. Because the array is partially sorted, the worst case run time is reduced 
-// to logarithmic time O(n * log(n)).
+// can be implemented to determine the insertion method.  Optimization points are repeat characters, 
+// encountering a character that is already sorted, etc.  Because the array is partially sorted, the worst 
+// case run time is reduced to logarithmic time O(n * log(n)).
 //***********************************************************************************************************
