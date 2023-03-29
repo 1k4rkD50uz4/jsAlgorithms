@@ -1,84 +1,56 @@
 import { inc, log } from './utils/helperFunctions.js';
-
+import client from '../client/app.js';
 //***********************************************************************************************************
 // Problem Statement:
 // Given a string with brackets (parenthesis (), brackets [] and braces {}), write a function to check if
 // the brackets are balanced.
 //
 // Solution: 
-// The function checks if the current bracket is an opening bracket, starting from the beginning
-// of the string, and moves to the next bracket until it reaches the first matching pair 
-// (i.e. the first closing bracket). Then it checks that the current bracket is closing and 
-// matches it's corresponding opening bracket at the right index in the string.
+// 
 //***********************************************************************************************************
-function checkBalancedBrackets() {
+export function checkBalancedBrackets() {
     const iter = s[Symbol.iterator]();
     let res = iter.next(),
         i = 0,
-        count=0,
-        b,
         mid = s.length % 2 == 0 ? s.length / 2 : (s.length - 1) / 2,
-        balanced = true;
+        obj = Object.create({ next: next }, {
+            i: {
+                value: i,
+                writable: true
+            },
+            c: {
+                value: res.value
+            },
+            match: {
+                value: undefined,
+                writable: true
+            }
+        });
+    obj.match = obj.next();
     while (!res.done) { 
-        next();
-        let j = s.length - inc(i);
-        if (s[j] === b) {
-            i++;
-            res = iter.next();
-            if (b == res.value) {
-                if (i == mid) {
-                    if (!count) {
-                        break;
-                    }
-                    else {
-                        count++;
-                        i++;
-                        next();
-                    }
-                }
-                else {
-                    i++;
-                    next();
-                }
+        res = iter.next();
+        if (obj.c != res.value) {
+            let i = s.substring(inc(s.indexOf(obj.c)), s.indexOf(obj.match)).indexOf(obj.c);
+            if (!i) {
+                i = s[s.length - inc(i)];
+            }
+            else {
+                i = inc(obj.i + i);
+                obj.i = i;
+                client.write(JSON.stringify(obj));
             }
         }
-        else {
-            next();
-        }
     }
-    return balanced;
     function next() {
-        let n = res.value.charCodeAt(0),
-            s = n.toString(2),
-            _b;
+        let n = this.c.charCodeAt(0),
+            s = n.toString(2);
         // get the bracket's closing bracket by checking it's binary value to determine
         // it's ascii code
         if (s.substring(s.length - 2) === '11') {
-            _b = String.fromCharCode(inc(++n));
-            if (b && b === _b) {
-                i++;
-                res = iter.next();
-                next();
-            }
-            else {
-                b = _b;
-            }
-        }
-        else if (s.substring(s.length - 2) === '00') {
-            _b = String.fromCharCode(inc(n));
-            if (b === _b) {
-                if (i == s.length - 1) {
-
-                }
-            }
-            b = _b;
+            return String.fromCharCode(inc(++n));
         }
         else {
-            if (b == res.value) {
-                count++;
-                i++;
-                res = iter.next();
-            }
+            return String.fromCharCode(inc(n));
         }
     }
 }
