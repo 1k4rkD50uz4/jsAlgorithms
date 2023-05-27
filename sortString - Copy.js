@@ -23,22 +23,24 @@ function sortString() {
         let res = iter.next(),
             i = 0, j = s.length - inc(i), c = res.value, arr = [];
         while (!res.done) {
-            res = iter.next();
-            if (c < res.value) {
-                let _c = c.toLowerCase();
-                if (c != _c) {
-                    c = String.fromCharCode(inc(_c.charCodeAt(i)));
-                    arr.push.apply(arr, [s[j--], res.value, _c, c]);
-                    c = s[j--];
-                    i = j--;
-                }
+            if (c == res.value) {
+                c = c.toLowerCase();
+                res = iter.next();
+                arr.push.apply(arr, [s[j--], res.value, c, String.fromCharCode(inc(c.charCodeAt(i)))]);
+                c = s[j--];
+                i = j--;
+                c = s[i];
+            }
+            else if (c < res.value) {
+                arr.unshift.apply(arr, [c, res.value]);
+                res = iter.next();
+                res = iter.next();
+                c = res.value;
             }
             else {
-                c = s[i];
+                
                 if (c < res.value) {
-                    arr.unshift.apply(arr, [c, res.value]);
-                    c = s[j];
-                    res = iter.next();
+                    
                 }
                 i = s.length - inc(s.indexOf(res.value));
                 --i;
@@ -86,6 +88,7 @@ function sortString() {
                 i = s.indexOf((i => String.fromCharCode(inc(i)))(s[i].toLowerCase().charCodeAt(i)));
                 return [inc, s.length - i, c, res.value, arr];
             }
+            res = iter.next();
         }
     }
     function sort() {
