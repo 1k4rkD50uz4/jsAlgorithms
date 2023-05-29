@@ -20,22 +20,17 @@ function sortString() {
     const iter = s[Symbol.iterator]();
     function init() {
         const inc = i => ++i;
-        let res = iter.next(),
-            i = 0, j = s.length - inc(i), c = res.value, arr = [];
+        let res = iter.next(), i = 0, j = s.length - inc(i), c = res.value, arr = [];
         while (!res.done) {
             if (c == res.value) {
                 c = c.toLowerCase();
                 res = iter.next();
-                arr.push.apply(arr, [s[j--], res.value, c, String.fromCharCode(inc(c.charCodeAt(i)))]);
-                c = s[j--];
-                i = j--;
-                c = s[i];
+                arr.push.apply(arr, [s[j--], res.value, c, String.fromCharCode(inc(c.charCodeAt(i)))]);                
             }
             else if (c < res.value) {
                 arr.unshift.apply(arr, [c, res.value]);
+                c = process.argv[2];
                 res = iter.next();
-                res = iter.next();
-                c = res.value;
             }
             else {
                 
@@ -89,6 +84,7 @@ function sortString() {
                 return [inc, s.length - i, c, res.value, arr];
             }
             res = iter.next();
+            c = res.value;
         }
     }
     function sort() {
