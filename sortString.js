@@ -1,5 +1,5 @@
-//import { compare, inc } from './utils/helperFunctions.js';
-const s = "The quick brown fox jumped over the lazy dog";
+const utils = require('../utils/utils.js'),
+    s = "The quick brown fox jumped over the lazy dog";
 
 //***********************************************************************************************************
 // Problem Statement:
@@ -22,7 +22,7 @@ const s = "The quick brown fox jumped over the lazy dog";
 // loops over the entire array for each character to find the position to insert it into the array.  This is 
 // useful as a quick solution.  
 //*****************************************************************************************************************
-let arr = s.split('').sort((a, b) => compare(a, b));
+//let arr = s.split('').sort((a, b) => compare(a, b));
 
 //***********************************************************************************************************
 // Brute-Force Solution 2: Search and sort from the min char to the max char
@@ -37,13 +37,14 @@ let arr = s.split('').sort((a, b) => compare(a, b));
 //***********************************************************************************************************
 
 function searchNCharsNTimes() {
-    const incChar = c => String.fromCharCode(inc(c.charCodeAt(i))),
+    const inc = utils.inc,
+        incChar = c => String.fromCharCode(inc(c.charCodeAt(i))),
         foundChar = c => s.includes(c) ? arr.indexOf(c) == -1 ? true : false : false;
     let i = 0,
         // get the first char in the sentence
         start = s[i],
         arr = [' ', start],  // initialize the array with the minimum charcters space and upper-case letter to simplify the code
-        // get the first upper-case char in the alphabet from the start char above
+        // get the first lower-case char in the alphabet from the start char above
         c = String.fromCharCode(('' + ('' + start.charCodeAt(i))[i].charCodeAt(i)).split('').reverse().join('')).toLowerCase(),
         // get the last lower-case char in the alphabet to sort
         end = String.fromCharCode(inc(parseInt((+('' + c.charCodeAt(i)).split('').reverse().join('')), 16))),
@@ -60,6 +61,12 @@ function searchNCharsNTimes() {
     return arr;
 }
 searchNCharsNTimes();
+
+//***********************************************************************************************************
+// Worst-Case analysis
+// The worst-case assumes that the algorithm traverses all chars in the string n times (n is the number of 
+// characters in the string) to search for the current char.  Thus, the worst-case run time is O(n).
+//***********************************************************************************************************
 
 //*****************************************************************************************************************
 // Brute-Force Solution 3:  Memoization using an array data structure
@@ -102,3 +109,9 @@ function arraySort() {
     }
     return arr;
 }
+
+//***********************************************************************************************************
+// Worst-Case analysis
+// This algorithm also traverses all chars in the array n times where n is the number of characters in the string.
+// Thus, the worst-case run time is O(n).
+//***********************************************************************************************************
