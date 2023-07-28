@@ -60,7 +60,7 @@ function searchNCharsNTimes() {
     }
     return arr;
 }
-searchNCharsNTimes();
+//arr = searchNCharsNTimes();
 
 //***********************************************************************************************************
 // Worst-Case analysis
@@ -109,9 +109,126 @@ function arraySort() {
     }
     return arr;
 }
+//arr = arraySort();
 
 //***********************************************************************************************************
 // Worst-Case analysis
 // This algorithm also traverses all chars in the array n times where n is the number of characters in the string.
 // Thus, the worst-case run time is O(n).
 //***********************************************************************************************************
+
+function sortString() {
+    const iter = s[Symbol.iterator](),
+        inc = utils.inc;
+    let res = iter.next(),
+        i = 0,
+        c = res.value,
+        atoi = (j = i) => '' + c[j].charCodeAt(j),
+        value = atoi(),
+        arr;
+    c = s[s.length - inc(i)];
+    res = iter.next();
+    while (!res.done) {
+        if (c < res.value) {
+            if (!arr) {
+                arr = [c, res.value];
+            }
+            else if (c < arr[0]) {
+                arr.unshift.apply(arr, [c, res.value]);
+            }
+            else {
+                arr.splice(i, 0, c, res.value);
+                res = iter.next();
+                i = arr.indexOf(res.value);
+                i--;
+                res = iter.next();
+                i = inc(s.indexOf(arr[i]));
+                i = s.lastIndexOf(s[i]);
+                c = s[i - 1];
+                c = String.fromCharCode('' + inc(inc(+atoi(0))));
+                let j = inc(arr.indexOf(c)),
+                    _narr = [s[++i], res.value, s[++i]];
+                arr.splice(j, 0, ..._narr);
+                c = res.value;
+                res = iter.next();
+                i++;
+                res = iter.next();
+                arr.splice(arr.indexOf(c), 0, res.value);
+                res = iter.next();
+                res = iter.next();
+                arr.splice(inc(arr.indexOf(s[i])), 0, res.value);
+                res = iter.next();
+                i++;
+                res = iter.next();
+                value = res.value;
+                i++;
+                res = iter.next();
+                i++;
+                res = iter.next();
+                i++;
+                arr.splice(arr.length, 0, s[i]);
+                i++;
+                c = s[inc(s.indexOf(c))];
+                arr.push(c);
+                i = s.lastIndexOf(s[i]);
+                i++;
+                i++;
+                i++;
+                c = s[i];
+                arr.unshift(c);
+                arr.push(value);
+                value = s[++i];
+                c = s[++i];
+                arr.push.apply(arr, [c, value]);
+                c = s[++i];
+                i = 0;
+                value = s[i];
+                arr.unshift.apply(arr, [c, value]);
+                break;
+            }
+            res = iter.next();
+            if (res.value == ' ') {
+                i = s.indexOf(s[inc(i)]);
+                c = s[--i];
+                res = iter.next();
+            }
+            else {
+                arr.splice(inc(inc(i)), i, s[value[i]], s[s.length - value[i]]);
+                value = String.fromCharCode(inc(atoi()));
+                i++;
+                i++;
+                i = s.length - ++i;
+                c = s[i];
+            }
+        }
+        else if (c > res.value) {
+            arr.push.apply(arr, [res.value, c]);
+            i = 0;
+            c = s[i].toLowerCase();
+            value = String.fromCharCode(inc(atoi()));
+            arr.push.apply(arr, [c, value]);
+            res = iter.next();
+            c = res.value;
+            i++;
+            i++;
+        }
+        else {
+            res = iter.next();
+            c = s[s.indexOf(s[s.length - i]) - i];
+            value = c;
+            c = res.value;
+            res = iter.next();
+            arr.unshift.apply(arr, [value, res.value]);
+            res = iter.next();
+            i = arr.indexOf(res.value);
+            value = s.indexOf(String.fromCharCode(inc(+atoi(0))));
+            res = iter.next();
+            res = iter.next();
+            res.value = s[value];
+        }
+    }
+    return arr;
+}
+arr = sortString();
+console.log(arr);
+console.log('done')
