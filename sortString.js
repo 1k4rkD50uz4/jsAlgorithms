@@ -87,10 +87,10 @@ function arraySort() {
         sort.call({ c: res.value });
     }
     function sort() {
-        let i = 0,
-            c = this.c,
+        let c = this.c,
             res = true;
         if (arr.indexOf(c) == -1) {
+            let i = 0;
             for (let val of arr) {
                 let compRes = compare(c, val);
                 if (compRes == -1) {
@@ -98,12 +98,12 @@ function arraySort() {
                     return res;
                 }
                 else if (compRes == 1) {
-                    arr.splice(++i, 0, c);
-                    return res;
+                    if(i==arr.length-1){
+                        arr.splice(++i, 0, c);
+                        return res;
+                    }
                 }
-                else {
-
-                }
+                i++;
             }
         }
     }
